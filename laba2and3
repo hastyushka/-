@@ -1,0 +1,25 @@
+#define _CRT_SECURE_NO_DEPRECATE 
+#include <stdio.h> 
+#include <locale.h> 
+ 
+int main() { 
+ setlocale(LC_ALL, "RUS"); 
+ int a, b; 
+ puts("Введите число a:"); 
+ scanf("%d", &a); 
+ printf("Введено число %d\n", a); 
+ puts("Введите число b:"); 
+ scanf("%d", &b); 
+ printf("Введено число %d\n", b); 
+ puts("____________________________\n"); 
+ printf("| a * b | a + b | a - b|\n"); 
+ puts("____________________________\n"); 
+ printf("| %d * %d | %d + %d | %d - %d |\n", a, b, a, b, a, b); 
+ puts("____________________________\n"); 
+ printf("| %d\t| %d\t| %d\t|\n", a * b, a + b, a - b);
+
+
+printf("\nДано:\n\t 2 \n\t 333 \n Ответ: +%3.3f", 2 / 333.);
+
+printf("Радиус вписанной окр. = %f, радиус описанной окр. = %f.", side / 2., side/1.41);
+
