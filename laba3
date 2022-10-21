@@ -1,0 +1,35 @@
+#define _CRT_SECURE_NO_DEPRECATE
+#define _CRT_SECURE_NO_WARNINGS
+#define Deng 2.54
+#define Dspan 2.32
+#define Dstarlit 2.70
+#include <stdio.h>
+#include <locale.h>
+
+
+
+void laba_3() {
+	setlocale(LC_ALL, "RUS");
+
+	int num_1, num_2;
+	puts("Введите число:");
+	scanf("%d", &num_1);
+	printf("Введено число %d\n\n", num_1);
+	puts("Введите число:");
+	scanf("%d", &num_2);
+	printf("Введено число %d\n\n", num_2);
+	printf("Сумма чисел %d и %d равна %d\n\n", num_1, num_2, num_1 + num_2);
+	printf("Разность чисел %d и %d равна %d\n\n", num_1, num_2, num_1 - num_2);
+	printf("Произведение чисел %d и %d равно %d\n\n", num_1, num_2, num_1 * num_2);
+	printf("Частное при делении %d на %d равно %d\n\n", num_2, num_1, num_2 / num_1);
+
+
+
+	int sm;
+	puts("Введите значение в см:");
+	scanf("%d", &sm);
+	printf("%d см - это %.1f английских дюймов, %.1f испанских дюймов, %.1f старолитовских дюймов", sm, sm / Deng, sm / Dspan, sm / Dstarlit);
+
+
+
+}
