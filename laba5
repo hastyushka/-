@@ -1,0 +1,31 @@
+void laba5() {
+	setlocale(LC_ALL, "RUS");
+
+	//2
+	float x, a, b, y;
+	int t = 3;
+
+	puts("Введите х:");
+	scanf("%f", &x);
+
+
+	a = 1. / t + pow(x, 3);
+	b = t * t * sqrt(fabs(a + x));
+	y = pow(log(fabs(b + a * a)), 5);
+
+	printf("При t = %d и х = %.1e y равен %.2f", t, x, y);
+
+	//дз 26 var
+	float x, y, f;
+
+	setlocale(LC_ALL, "RUS");
+
+	puts("Введите х:");
+	scanf("%e", &x);
+	puts("Введите у:");
+	scanf("%e", &y);
+
+	f = (1 + pow(sin(x + y), 2)) / (2 + fabs(x - 2*x/(1+x*x*y*y))) + x;
+
+	printf("Функция F(%f, %f) равна %f", x, y, f);
+}
