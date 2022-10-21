@@ -1,0 +1,28 @@
+void main() {
+	setlocale(LC_ALL, "RUS");
+	//1
+	int year;
+
+	puts("Введите год:");
+	scanf("%d", &year);
+
+	if ((!(year % 4) && (year % 100)) || !(year % 400))
+		printf("Год %d високосный", year);
+	else printf("Год %d не високосный", year);
+
+
+	//2
+	float x, f;
+	puts("Введите х:");
+	scanf("%f", &x);
+	printf("%f", f = (x <= 3) ? (-x * x + 3 * x + 9) : (x / (x * x + 1)));
+
+	//3
+	float g, kor, kvad;
+	puts("Введите число:");
+	scanf("%f", &g);
+	kor = pow(g, 0.5);
+	kvad = pow(g, 2);
+	printf("квадрат - %f, само число - %f, корень - %f", kvad, g, kor);
+  
+}
