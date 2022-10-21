@@ -1,3 +1,11 @@
+#define _CRT_SECURE_NO_DEPRECATE
+#define _CRT_SECURE_NO_WARNINGS
+#define Deng 2.54
+#define Dspan 2.32
+#define Dstarlit 2.70
+#include <stdio.h>
+#include <locale.h>
+
 void laba_2() {
   puts("Введите число:");
 	scanf("%d", &n);
