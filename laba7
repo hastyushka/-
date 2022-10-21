@@ -1,4 +1,4 @@
-void laba7() {
+void main() {
 	setlocale(LC_ALL, "RUS");
 	//7.1
 	char c;
