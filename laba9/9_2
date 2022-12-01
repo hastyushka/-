@@ -1,0 +1,29 @@
+#define _CRT_SECURE_NO_DEPRECATE
+#include <stdio.h>
+#include <locale.h>
+#include <math.h>
+ 
+//кол-во цифрр больших 5
+
+void main(){
+	int x;
+
+	while (1) {
+		setlocale(LC_ALL, "rus");
+		printf("Введите число:\n");
+		scanf("%d", &x);
+		char v;
+		int count=0;
+		while (x / 10 != 0) {
+			if (x % 10 > 5) {
+				count++;
+			}
+			x = x / 10;
+		}
+		printf("Кол-во чисел больших 5 равно %d\n", count);
+
+		printf("Хотите продолжить работу алгоритма?\n Любая клавиша = да, n = нет.\n");
+		scanf("%c", &v);
+		if (v = getchar() == 'n') break;
+	}
+}
