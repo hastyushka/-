@@ -1,0 +1,30 @@
+#define _CRT_SECURE_NO_DEPRECATE
+
+#include <stdio.h>
+#include <locale.h>
+#include <math.h>
+#include <stdlib.h>
+
+
+float function(float x) {
+	return 1.8 * x * x - sin(10 * x);
+}
+
+void main() {
+	setlocale(LC_ALL, "RUS");
+	float d[100];
+	float j = 0.2, sum1 = 0, sum2 = 0;
+	int count1 = 0, count2 = 0;
+	for (int i = 0; (j < 2.2 && i < 100); j += 0.01, i++) {
+		d[i] = function(j);
+		if (d[i] > 0) {
+			sum1 += d[i];
+			count1+=1;
+		}
+		else {
+			sum2 += d[i];
+			count2+=1;
+		}
+	}
+	printf("Имя массива = 'd' , накопленное положительное значение = %f , накопленное отрицательное значение = %f , число положительных = %d , число отрицательных = %d , вычисленное среднее = %.2f ", sum1, sum2, count1, count2, (sum1 + sum2) / (count1 + count2));
+}
