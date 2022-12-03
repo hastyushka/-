@@ -1,0 +1,31 @@
+#define _CRT_SECURE_NO_DEPRECATE
+#define N 10
+#include <stdio.h>
+#include <locale.h>
+#include <math.h>
+
+int main() {
+    setlocale(LC_ALL, "RUS");
+    float A[N];
+    float B[N];
+    float temp, s = 0;
+
+    for (int i = 0; i < N; i++){
+        printf("a[%d] = ", i + 1);
+        scanf("%f", &temp);
+
+        A[i] = temp;
+    }
+
+    for (int i = 0; i < N; i++) {
+        B[i] = pow(A[i], 2);
+        s += B[i];
+    }
+
+    printf("\n| индекс | исходное значение | новое значение |\n");
+    for (int i = 0; i < N; i++) {
+        printf("| %d \t | %.2f \t     | %.2f \t      |\n", i, A[i], B[i]);
+    }
+
+    printf("\nСреднее арифметическое элементов массива: %.2f", s / N);
+}
