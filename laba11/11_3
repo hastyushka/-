@@ -1,0 +1,38 @@
+#define _CRT_SECURE_NO_DEPRECATE
+#define N 10
+#include <stdio.h>
+#include <locale.h>
+#include <math.h>
+#include <stdlib.h>
+
+
+int index_sum(int i) {
+	int sum = 0;
+	i++;
+	for (i; i < N; i++) {
+		sum += i;
+	}
+	return sum;
+}
+
+
+
+void main() {
+	setlocale(LC_ALL, "RUS");
+	float a[N];
+	int i;
+	int pr = 1;
+	setlocale(LC_ALL, "rus");
+
+	for (i = 0; i < N; i++) {
+		printf("a[%d] = ", i);
+		scanf("%f", &a[i]);
+	}
+	for (i = 0; i < N; i++) {
+		if (a[i] > 0) {
+			pr *= i;
+		}
+	}
+
+	printf("Произведение порядковых номеров элементов массива больших нуля равно %d", pr);
+}
