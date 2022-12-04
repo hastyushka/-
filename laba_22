@@ -1,0 +1,206 @@
+#define _CRT_SECURE_NO_DEPRECATE
+
+#include <stdio.h>
+#include <locale.h>
+#include <math.h>
+#include <stdlib.h>
+
+
+
+typedef double(*TFun)(double);
+
+double fun1(double x) {
+	if (x > 0) {
+		return log(fabs(pow(x, 1, 5)));
+	}
+	else return 0;
+}
+
+double fun2(double x) {
+	if (x > 1) {
+		return pow(tan(x * x - 1), 0, 5);
+	}
+	if (x >= 0 && x <= 1) {
+		return -2 * x;
+	}
+	if (x < 0) {
+		return exp(cos(x));
+	}
+}
+
+double fun3(double x) {
+	return ((x - 1) / (x + 1)) + (1 / 3) * pow(((x - 1) / (x + 1)), 3) + (1 / 5) * pow(((x - 1) / (x + 1)), 5) + (1 / 7) * pow(((x - 1) / (x + 1)), 7);
+}
+
+void t_rez(TFun f, double a, double b, double c) {
+	for (a; a <= b; a += c) {
+		printf("x = %5.21f y = %8.41f\n", a, f(a));
+	}
+}
+
+double razmah(TFun f, double xmin, double xmax, double step) {
+	double min = 100000;
+	double max = -100000;
+	for (double x = xmin; x <= xmax; x += step) {
+		if (f(x) < min) {
+			min = f(x);
+		}
+		if (f(x) > max) {
+			max = f(x);
+		}
+		else continue;
+	}
+	return max - min;
+}
+/*
+// минимальное значение функции (индивидуальное задание 16)
+double action(TFun f, double xmin, double xmax) {
+	double min = 100000;
+	for (double x = xmin; x <= xmax; x += 0.01) {
+		if (f(x) < min) {
+			min = f(x);
+		}
+	}
+	return min;
+}
+*/
+void main() {
+	setlocale(LC_ALL, "RUS");
+	double a, b, c;
+	int x = 0;
+
+	double w, tmin, tmax, tstep;
+	int v = 0;
+
+	/*
+	puts("Введите a,b,c");
+	scanf("%lf%lf%lf", &a, &b, &c);
+	puts("\n\t Функция - ln|корень из x^3|");
+	t_rez(fun1, a, b, c);
+
+	puts("\n\t Функция - ");
+	puts("\n\t корень из tg(x^2 - 1)    x > 1");
+	puts("\n\t  -2x                     0 <= x <= 1");
+	puts("\n\t  e^(cos(x))              x < 0\n");
+	
+	t_rez(fun2, a, b, c);
+
+	puts("\n\t Функция - ((x - 1) / (x + 1)) + (1 / 3) * pow(((x - 1) / (x + 1)), 3) + (1 / 5) * pow(((x - 1) / (x + 1)), 5) + (1 / 7) * pow(((x - 1) / (x + 1)), 7)");
+	t_rez(fun3, a, b, c);
+	*/
+
+	while (x != 4) {
+		puts("Выберите команду:");
+		puts("1. Вычислить значение функции");
+		puts("2. Табулировать функцию");
+		puts("3. Выполнить операцию");
+		puts("4. Выход\n");
+		scanf("%d", &x);
+		switch (x) {
+		case 1:
+			puts("Выберите функцию:");
+			puts("1. Функция - ln|sqrt(x^3)|");
+			puts("2. Функция - \nsqrt(tg(x^2 - 1))  при  x > 1\n -2x  при  0 <= x <= 1\ne^(cos(x)) при x < 0");
+			puts("3. Функция - ((x - 1) / (x + 1)) + (1 / 3) * pow(((x - 1) / (x + 1)), 3) + (1 / 5) * pow(((x - 1) / (x + 1)), 5) + (1 / 7) * pow(((x - 1) / (x + 1)), 7)\n");
+			scanf("%d", &v);
+			switch (v) {
+			case 1:
+				puts("Введите значение");
+				scanf("%lf", &w);
+				printf("При значении %lf результатом будет %lf\n", w, fun1(w));
+				break;
+			case 2:
+				puts("Введите значение");
+				scanf("%lf", &w);
+				printf("При значении %lf результатом будет %lf\n", w, fun2(w));
+				break;
+			case 3:
+				puts("Введите значение");
+				scanf("%lf", &w);
+				printf("При значении %lf результатом будет %lf\n", w, fun3(w));
+				break;
+			}
+			break;
+		case 2:
+			puts("Выберите функцию:");
+			puts("1. Функция - ln|sqrt(x^3)|");
+			puts("2. Функция - \nsqrt(tg(x^2 - 1))  при  x > 1\n -2x  при  0 <= x <= 1\ne^(cos(x)) при x < 0");
+			puts("3. Функция - ((x - 1) / (x + 1)) + (1 / 3) * pow(((x - 1) / (x + 1)), 3) + (1 / 5) * pow(((x - 1) / (x + 1)), 5) + (1 / 7) * pow(((x - 1) / (x + 1)), 7)");
+			scanf("%d", &v);
+			switch (v) {
+			case 1:
+				puts("Исходные данные:");
+				puts("Введите начало интервала");
+				scanf("%lf", &tmin);
+				puts("Введите конец интервала");
+				scanf("%lf", &tmax);
+				puts("Введите шаг табуляции");
+				scanf("%lf", &tstep);
+				t_rez(fun1, tmin, tmax, tstep);
+				break;
+			case 2:
+				puts("Исходные данные:");
+				puts("Введите начало интервала");
+				scanf("%lf", &tmin);
+				puts("Введите конец интервала");
+				scanf("%lf", &tmax);
+				puts("Введите шаг табуляции");
+				scanf("%lf", &tstep);
+				t_rez(fun2, tmin, tmax, tstep);
+				break;
+			case 3:
+				puts("Исходные данные:");
+				puts("Введите начало интервала");
+				scanf("%lf", &tmin);
+				puts("Введите конец интервала");
+				scanf("%lf", &tmax);
+				puts("Введите шаг табуляции");
+				scanf("%lf", &tstep);
+				t_rez(fun3, tmin, tmax, tstep);
+				break;
+			}
+			break;
+		case 3:
+			puts("Выберите функцию:");
+			puts("1. Функция - ln|sqrt(x^3)|");
+			puts("2. Функция - \nsqrt(tg(x^2 - 1))  при  x > 1\n -2x  при  0 <= x <= 1\ne^(cos(x)) при x < 0");
+			puts("3. Функция - ((x - 1) / (x + 1)) + (1 / 3) * pow(((x - 1) / (x + 1)), 3) + (1 / 5) * pow(((x - 1) / (x + 1)), 5) + (1 / 7) * pow(((x - 1) / (x + 1)), 7)");
+			scanf("%d", &v);
+			switch (v) {
+			case 1:
+				puts("Исходные данные:");
+				puts("Введите начало интервала");
+				scanf("%lf", &tmin);
+				puts("Введите конец интервала");
+				scanf("%lf", &tmax);
+				puts("Введите шаг табуляции");
+				scanf("%lf", &tstep);
+				printf("Размах функции = %lf\n", razmah(fun1, tmin, tmax, tstep));
+				break;
+			case 2:
+				puts("Исходные данные:");
+				puts("Введите начало интервала");
+				scanf("%lf", &tmin);
+				puts("Введите конец интервала");
+				scanf("%lf", &tmax);
+				puts("Введите шаг табуляции");
+				scanf("%lf", &tstep);
+				printf("Размах функции = %lf\n", razmah(fun2, tmin, tmax, tstep));
+				break;
+			case 3:
+				puts("Исходные данные:");
+				puts("Введите начало интервала");
+				scanf("%lf", &tmin);
+				puts("Введите конец интервала");
+				scanf("%lf", &tmax);
+				puts("Введите шаг табуляции");
+				scanf("%lf", &tstep);
+				printf("Размах функции = %lf\n", razmah(fun3, tmin, tmax, tstep));
+				break;
+			}
+			break;
+		case 4:
+			break;
+		}
+	}
+}
