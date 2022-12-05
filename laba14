@@ -1,0 +1,99 @@
+#define _CRT_SECURE_NO_DEPRECATE
+#define N 10
+
+#include <stdio.h>
+#include <locale.h>
+#include <math.h>
+#include <stdlib.h>
+
+double* full_elements(double* ptr_array, int size);
+int put_elements(double* ptr_array, int size);
+double* calc_elements(double* ptr_array, int size);
+double sum_elements(double* ptr_array, int begin, int end);
+int find_element(double* ptr_array, int n, double element);
+double max_el(double* ptr_array, int begin, int k);
+
+void main() {
+	setlocale(LC_CTYPE, "RU");
+
+	double array[N];
+	double a;
+	int size, el, k;
+
+	printf("Введите размер массива > ");
+	scanf("%d", &size);
+
+	full_elements(array, size);
+	put_elements(array, size);
+	calc_elements(array, size);
+	sum_elements(array, 0, size);
+
+	puts("\nКакой элемент массива хотите найти?");
+	scanf("%lf", &a);
+
+	el = find_element(array, size, a);
+	if (el != -1) {
+		printf("Элемент найден. Возвращаемое значение = %d\n", el);
+	}
+	else {
+		printf("Элемент не найден. Возвращаемое значение = %d\n", el);
+	}
+
+	puts("До какого элемента посчитать максимальное значение?:");
+	scanf("%d", &k);
+	printf("Максимальный элемент от 0 до %d -- %lf", k, max_el(array, 0, k));
+
+}
+
+double* full_elements(double* ptr_array, int size) {
+	double x = 0, mx = 0, mi = 0;
+
+	for (int i = 0; i < size; i++) {
+		printf("Введите a[%d] = ", i);
+		scanf("%lf.", &x);
+		ptr_array[i] = x;
+	}
+	return ptr_array;
+}
+
+int put_elements(double* ptr_array, int size) {
+	for (int i = 0; i < size; i++) {
+		printf("a[%d] = %f\n", i, ptr_array[i]);
+	}
+}
+
+double* calc_elements(double* ptr_array, int size) {
+	int p = 1;
+	for (int i = 0; i < size; i++) {
+		if (ptr_array[i] > 0) {
+			p *= i;
+		}
+	}
+	printf("Произведение индексов положительных элементов равно %d\n", p);
+}
+
+double sum_elements(double* ptr_array, int begin, int end) {
+	double sum = 0;
+	for (begin; begin<end; begin++) {
+		sum += ptr_array[begin];
+	}
+	printf("Сумма элементов равна %lf\n", sum);
+}
+int find_element(double* ptr_array, int size, double element) {
+	for (int i = 0; i < size; i++) {
+		if (ptr_array[i] == element) {
+			return i;
+		}
+	}
+	return -1;
+}
+
+double max_el(double* ptr_array, int begin, int k) {
+	double mx = -10000;
+	for (begin; begin <= k; begin++) {
+		if (ptr_array[begin] > mx) {
+			mx = ptr_array[begin];
+		}
+	}
+	return mx;
+}
