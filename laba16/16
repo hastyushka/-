@@ -1,0 +1,107 @@
+#define _CRT_SECURE_NO_DEPRECATE
+#define N 10
+
+#include <stdio.h>
+#include <locale.h>
+#include <math.h>
+#include <stdlib.h>
+
+
+double sr_ar(double* ptr_array, int size) {
+	double sum = 0;
+	int count_el = 0;
+	for (int i = 0; i < size; i++) {
+		sum += ptr_array[i];
+		count_el += 1;
+	}
+
+	return sum / count_el;
+}
+
+int delete_k(double* ptr_array, int size) {
+
+	int n = size - 1;
+
+	for (int i = 0; i < size - 1; i++) {
+		if (ptr_array[i] < sr_ar(ptr_array, size)) {
+			ptr_array[i] = ptr_array[i + 1];
+		}
+	}
+	for (int i = 0; i < size; i++) {
+		printf("a[%d] = %lf\n", i, ptr_array[i]);
+	}
+	for (int i = 0; i < size; i++) {
+		if (ptr_array[i] < 0) {
+			ptr_array[i - 1] = 999;
+			break;
+		}
+	}
+	for (int i = 0; i < size; i++) {
+		printf("a[%d] = %lf\n", i, ptr_array[i]);
+	}
+
+	return n;//возвращает число элементов массива
+
+}
+
+
+
+void main() {
+	setlocale(LC_CTYPE, "RU");
+
+	double* ptr_array;
+	int* ptr_narray;
+	int size;
+	double array[N];
+	int narray[1];
+	int p = 1;
+
+	puts("Введите размерность массива:");
+	scanf("%d", &size);
+
+	ptr_array = (double*)malloc(size * sizeof(double));
+	if (ptr_array == NULL) {
+		puts("error\n");
+		return -1;
+	}
+	ptr_narray = (int*)malloc(size * sizeof(int));
+	if (ptr_narray == NULL) {
+		puts("error\n");
+		return -1;
+	}
+
+	for (int i = 0; i < size; i++) {
+		array[i] = (double)rand() / (double)RAND_MAX * (1 - (-1)) + (-1);
+	}
+
+	int count = 0;
+	for (int i = 0; i < size; i++) {
+		if (array[i] > 0) {
+			p *= i;
+			count++;
+		}
+	}
+
+	if (count == 0) {
+		narray[0] = 0;
+	}
+	else narray[0] = p;
+
+	puts("\n1 массив\n");
+	for (int i = 0; i < size; i++) {
+		printf("%lf\t", array[i]);
+	}
+
+	printf("\n\n2 массив\n\n%d\n\n", narray[0]);
+
+	printf("Среднее арифметическое значений массива - %lf\n", sr_ar(array, size));
+	
+	delete_k(array, size);
+
+}
+
+
+void free(int* ptr_narray, double* ptr_array) {
+
+}
+
