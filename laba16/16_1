@@ -1,0 +1,60 @@
+#define _CRT_SECURE_NO_DEPRECATE
+#define N 10
+
+#include <stdio.h>
+#include <locale.h>
+#include <math.h>
+#include <stdlib.h>
+
+
+void main() {
+	setlocale(LC_CTYPE, "RU");
+	
+	int* ptr_array;
+	int* ptr_narray;
+	int size;
+	int array[N], narray[1];
+	int p=1;
+
+	puts("Введите размерность массива:");
+	scanf("%d", &size);
+
+	ptr_array = (int*)malloc(size * sizeof(int));
+	if (ptr_array == NULL) {
+		puts("error\n");
+		return -1;
+	}
+	ptr_narray = (int*)malloc(size * sizeof(int));
+	if (ptr_narray == NULL) {
+		puts("error\n");
+		return -1;
+	}
+
+	for (int i = 0; i < size; i++) {
+		array[i] = -50  + rand()%100;
+	}
+	int count = 0;
+	for (int i = 0; i < size; i++) {
+		if (array[i] > 0) {
+			p *= i;
+			count++;
+		}
+	}
+	if (count == 0) {
+		narray[0] = 0;
+	}
+	else narray[0]= p;
+	
+	puts("\n1 массив\n");
+	for (int i = 0; i < size; i++) {
+		printf("%d\t", array[i]);
+	}
+
+	printf("\n\n2 массив\n\n%d\n\n", narray[0]);
+
+	free(array, narray);
+}
+
+void free(int* ptr_narray, int* ptr_array) {
+
+}
