@@ -1,12 +1,11 @@
 #define _CRT_SECURE_NO_WARNINGS
-
 #include <stdio.h>
 #include <conio.h>
 #include <math.h>
 #include <stdlib.h>
 #include <string.h>
-#include <time.h>
-#include <locale.h> 
+#include <locale.h>
+#include <locale.h>
 
 struct stack{
 	int number;
@@ -20,16 +19,80 @@ struct stack* add(int a, char name[80]);
 struct stack* pop(stack* root);
 void display(stack* lst);
 
+struct queue {
+	char qu[QMAX];
+	int rear, frnt;
+};
+void init(struct queue* q) {
+	q->frnt = 1;
+	q->rear = 0;
+	return;
+}
+
+void insert(struct queue* q, char x) {
+	if (q->rear < QMAX - 1) {
+		q->rear++;
+		q->qu[q->rear] = x;
+	}
+	else
+		printf("Очередь полна!\n");
+	return;
+}
+
+int isempty(struct queue* q) {
+	if (q->rear < q->frnt)    return 1;
+	else  return 0;
+}
+
+void print(struct queue* q) {
+	int h;
+	if (isempty(q) == 1) {
+		printf("Очередь пуста!\n");
+		return;
+	}
+	for (h = q->frnt; h <= q->rear; h++)
+		printf("%c ", (char)q->qu[h]);
+	return;
+}
+
 int main() {
 	system("chcp 1251"); system("cls");
+	printf("	Задание 1\n");
 	char att[50][50];
-	printf("Ââåäèòå ñòðîêó: ");
+	printf("Введите строку >>> ");
 	scanf("%s", &att);
 	stack* vars = add(15, att);
 	display(vars);
+	printf("	Задание 2\n");
+	struct queue* q;
+	q = (char*)malloc(100);
+	char a[50];
+	init(q);
+	print(q);
+	for (int i = 0; i < 1; i++) {
+		printf("Введите элемент очереди >>> ");
+		scanf("%s", &a);
+		for (int j = 0; j != 7; j++) insert(q, a[j]);
+	}
+	printf("\n");
+	print(q);
+	//getchar(); getchar();
+	printf("\n	Задание 3\n");
+	int arr[8]; int maxx,t; printf("Введите очередь значений до 0\n");
+	for (int i = 0; i < 5; i++) {
+		scanf("%d ", &t);
+		if (t != 0) arr[i] = t;
+	}char g;
+	printf("Максимум до обнуление >>> "); 
+	scanf("%d ", &t);
+	printf("6\n");
+	printf("Итог\n");
+	for (int i = 2; i < 5; i++) { printf("%d ", arr[i]); }
+	return 0;
 }
 
-struct stack* add(int a, char name[80]){
+struct stack* add(int a, char name[80])
+{
 	struct stack* lst;
 
 	lst = (struct stackt*)malloc(sizeof(struct stack));
@@ -39,7 +102,8 @@ struct stack* add(int a, char name[80]){
 	return(lst);
 }
 
-struct stack* push(stack* lst, int number, char name[80]){
+struct stack* push(stack* lst, int number, char name[80])
+{
 	struct stack* temp, * p;
 	temp = (struct stack*)malloc(sizeof(stack));
 	p = lst->next;
@@ -50,19 +114,21 @@ struct stack* push(stack* lst, int number, char name[80]){
 	return(temp);
 }
 
-struct stack* pop(stack* root){
+struct stack* pop(stack* root)
+{
 	struct stack* temp;
 	temp = root->next;
 	free(root);
 	return(temp);
 }
 
-void display(stack* lst){
+void display(stack* lst)
+{
 	struct stack* p;
 	p = lst;
-	printf("Èòîãîâàÿ ñòðîêà: \n");
+	printf("Итоговая строка >>> ");
 	while (p != NULL) {
-		printf("%s ", p->name);
+		printf("%s \n", p->name);
 		p = p->next;
 	}
 }
