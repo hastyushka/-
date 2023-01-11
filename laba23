@@ -1,0 +1,127 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <conio.h>
+#include <math.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
+#include <locale.h>
+
+struct list{
+	int number;
+	char name[80];
+	struct listitem* next;
+};
+
+typedef struct list list;
+struct list* addelem(list* lst, int number, char name[80]);
+struct list* init(int a, char name[80]);
+struct list* deletehead(list* root);
+void listprint(list* lst);
+
+struct list2{
+	char name[80];
+	struct listitem* next;
+};
+
+typedef struct list2 listik;
+struct list2* addelemm(listik* lst, char name[80]);
+struct list2* initt(char name[80]);
+struct list2* deleteheadd(listik* root);
+void listprintt(listik* lst);
+
+int main() {
+	setlocale(LC_ALL, "RUS");
+
+	list* vars = init(15, "David");
+	addelem(vars, 2, "Sara");
+	listprint(vars);
+
+	listik* varss = init("David", "", "", "", "", "");
+	addelemm(varss, "Sara", "Qwtre", "asdasd", "выаозывж0", "Sываыва", "Saкк");
+	addelemm(varss, "Sara", "Qwtre", "asdasd", "выаозывж0", "Sываыва", "Saкк");
+	listprintt(varss);
+}
+
+struct list* init(int a,char name[80]){
+	struct list* lst;
+
+	lst = (struct list*)malloc(sizeof(struct list));
+	lst->number = a;
+	strcpy(lst->name, name);
+	lst->next = NULL;
+	return(lst);
+}
+
+struct list* addelem(list* lst, int number, char name[80]){
+	struct list* temp, * p;
+	temp = (struct list*)malloc(sizeof(list));
+	p = lst->next;
+	lst->next = temp;
+	temp->number = number;
+	strcpy(temp->name, name);
+	temp->next = p;
+	return(temp);
+}
+
+struct list* deletehead(list* root){
+	struct list* temp;
+	temp = root->next;
+	free(root);
+	return(temp);
+}
+
+void listprint(list* lst){
+	struct list* p;
+	p = lst;
+	while(p != NULL) {
+		printf("Имя %s Число %d \n", p->name,p->number);
+		p = p->next;
+	}
+}
+
+struct list2* initt(char name[80]){
+	struct list2* lst;
+
+	lst = (struct list2*)malloc(sizeof(struct list2));
+
+	strcpy(lst->name, name);
+	lst->next = NULL;
+	return(lst);
+}
+
+struct list2* addelemm(listik* lst, char name[80]){
+	struct list2* temp, * p;
+	temp = (struct list2*)malloc(sizeof(listik));
+	p = lst->next;
+	lst->next = temp;
+
+	strcpy(temp->name, name);
+	temp->next = p;
+	return(temp);
+}
+
+struct list2* deleteheadd(listik* root){
+	struct list2* temp;
+	temp = root->next;
+	free(root);
+	return(temp);
+}
+
+void listprintt(listik* lst){
+	struct list2* p;
+	p = lst;
+	int count = 0;
+
+	while (p != NULL) {
+		for (int i = 0; i < strlen(p->name); i++) {
+			if (isalpha(p->name[i]) == 0) {
+				count++;
+			}
+		}
+		printf("Имя %s\n", p->name);
+		p = p->next;
+	}
+	printf("Количество букв латинского алфавита в массиве %d\n", count);
+
+}
